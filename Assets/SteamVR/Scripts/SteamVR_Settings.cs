@@ -101,7 +101,12 @@ namespace Valve.VR
             if (_instance == null)
             {
                 _instance = Resources.Load<SteamVR_Settings>("SteamVR_Settings");
-
+#if UNITY_EDITOR
+                if (_instance == null)
+                {
+                    _instance = UnityEditor.AssetDatabase.LoadAssetAtPath<SteamVR_Settings>("Assets/SteamVR_Resources/Resources/SteamVR_Settings.asset");
+                }
+#endif
                 if (_instance == null)
                 {
                     _instance = SteamVR_Settings.CreateInstance<SteamVR_Settings>();
